@@ -9,15 +9,11 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-parameters:
-  - name: buildType
-    type: string
-
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  buildType: 'dotnet'
+  buildType: ${{parameters.buildType}}
 
 resources:
  repositories:
@@ -32,7 +28,11 @@ resources:
 extends:
  template: common.yml@Common_templates
  parameters:
-   buildType: ${{parameters.buildType}}
+    buildType: 'dotnet'
+# steps:
+#   - template: common.yml@Common_templates
+#     parameters:
+#       buildType: ${{parameters.buildType}}
    
   
 
