@@ -9,15 +9,11 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-parameters:
-  - name: buildType
-    type: string
-
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  buildType: ${{parameters.buildType}}
+  #buildType: ${{parameters.buildType}}
 
 resources:
  repositories:
@@ -30,13 +26,9 @@ resources:
      name: jatla991/DiscussIt-DotNet-Framework-Project
      ref: master
 extends:
- template: common.yml@Common_templates
+ template: build.yml@Common_templates 
  parameters:
     buildType: 'dotnet'
-# steps:
-#   - template: common.yml@Common_templates
-#     parameters:
-#       buildType: ${{parameters.buildType}}
    
   
 
