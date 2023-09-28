@@ -27,12 +27,13 @@ resources:
    - repository: DiscussIt-DotNet-Framework-Project
      type: github
      endpoint: My Project
-     name: DiscussIt-DotNet-Framework-Project
+     name: jatla991/DiscussIt-DotNet-Framework-Project
+     ref: master
 
 
 
 steps:
-- template: 
+- template: common.yml@Common_templates
 
 - task: CopyFiles@2
   inputs:
