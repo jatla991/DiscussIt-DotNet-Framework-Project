@@ -9,12 +9,6 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-parameters:
-  - name: buildType
-    type: string
-  - name: env
-    type: string
-
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -31,18 +25,11 @@ resources:
      endpoint: My Project
      name: jatla991/DiscussIt-DotNet-Framework-Project
      ref: master
-# extends:
-#  template: build.yml@Common_templates 
-#  parameters:
-#     buildType: 'dotnet'
-#     env: 'dev'
-steps:
-  - template: common.yml@Common_template
-    parameters:
-      buildType: 'dotnet'
-      env: 'prod'
-
-    
+extends:
+ template: build.yml@Common_templates 
+ parameters:
+    buildType: 'dotnet'
+    env: 'dev'
    
   
 
