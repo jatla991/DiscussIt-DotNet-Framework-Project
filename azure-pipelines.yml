@@ -9,6 +9,10 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+parameters:
+  - name: buildType
+    type: string
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
