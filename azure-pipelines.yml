@@ -9,29 +9,30 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+parameters:
+  - name: buildType
+    type: string
+    default: dotnet
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+resources:
+ repositories:
+   - repository: Common_templates
+     type: git
+     name: Common_templates
+   - repository: DiscussIt-DotNet-Framework-Project
+     type: github
+     endpoint: My Project
+     name: DiscussIt-DotNet-Framework-Project
+
+
+
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(System.DefaultWorkingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- template: 
 
 - task: CopyFiles@2
   inputs:
